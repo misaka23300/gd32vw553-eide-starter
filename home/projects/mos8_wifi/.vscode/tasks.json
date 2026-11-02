@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "process",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/../../scripts/gd32.py",
+                "build",
+                "${workspaceFolderBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cmake: configure",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--preset",
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake: build",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "--preset",
+                "default"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": [
+                "cmake: configure"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "clean",
+            "type": "process",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/../../scripts/gd32.py",
+                "clean",
+                "${workspaceFolderBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "flash",
+            "type": "process",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/../../scripts/gd32.py",
+                "flash",
+                "${workspaceFolderBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

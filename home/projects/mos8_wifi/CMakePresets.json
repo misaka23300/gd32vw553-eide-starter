@@ -1,0 +1,29 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "mos8_wifi (RISC-V GNU Make)",
+            "description": "裸机 8 路 MOS 控制，产物输出到 build/",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/cmake",
+            "toolchainFile": "${sourceDir}/cmake/riscv-toolchain.cmake",
+            "environment": {
+                "PATH": "${sourceDir}/../../tools/gcc/bin;${sourceDir}/../../tools/Nuclei/OpenOCD/2025.10/bin;$penv{PATH}"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "displayName": "Build mos8_wifi",
+            "configurePreset": "default",
+            "jobs": 8
+        }
+    ]
+}

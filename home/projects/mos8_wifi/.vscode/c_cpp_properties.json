@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "GD32VW553",
+            "compilerPath": "${workspaceFolder}/../../tools/gcc/bin/riscv-nuclei-elf-gcc.exe",
+            "compilerArgs": [
+                "-march=rv32imafdc",
+                "-mabi=ilp32d"
+            ],
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/../../sdk/GD32VW55x_Firmware_Library/Firmware/GD32VW55x_standard_peripheral",
+                "${workspaceFolder}/../../sdk/GD32VW55x_Firmware_Library/Firmware/GD32VW55x_standard_peripheral/Include",
+                "${workspaceFolder}/../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/drivers",
+                "${workspaceFolder}/../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/stubs"
+            ],
+            "defines": [
+                "USE_STDPERIPH_DRIVER"
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++17"
+        }
+    ],
+    "version": 4
+}

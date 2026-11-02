@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (CMSIS-DAP / GD-Link)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "serverpath": "${workspaceFolder}/../../tools/Nuclei/OpenOCD/2025.10/bin/openocd.exe",
+            "searchDir": [
+                "${workspaceFolder}/../../tools/Nuclei/OpenOCD/2025.10/scripts"
+            ],
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "${workspaceFolder}/.vscode/openocd-jtag.cfg",
+                "target/gd32vw55x.cfg"
+            ],
+            "gdbPath": "${workspaceFolder}/../../tools/gcc/bin/riscv-nuclei-elf-gdb.exe",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "Debug (J-Link)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "serverpath": "${workspaceFolder}/../../tools/Nuclei/OpenOCD/2025.10/bin/openocd.exe",
+            "searchDir": [
+                "${workspaceFolder}/../../tools/Nuclei/OpenOCD/2025.10/scripts"
+            ],
+            "configFiles": [
+                "interface/jlink.cfg",
+                "${workspaceFolder}/.vscode/openocd-jtag.cfg",
+                "target/gd32vw55x.cfg"
+            ],
+            "gdbPath": "${workspaceFolder}/../../tools/gcc/bin/riscv-nuclei-elf-gdb.exe",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "build"
+        }
+    ]
+}

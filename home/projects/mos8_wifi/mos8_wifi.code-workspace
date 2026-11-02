@@ -1,0 +1,12 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "EIDE.RISCV.InstallDirectory": "${workspaceFolder}/../../tools/gcc",
+        "EIDE.RISCV.ToolPrefix": "riscv-nuclei-elf-",
+        "EIDE.OpenOCD.ExePath": "${workspaceFolder}/../../tools/Nuclei/OpenOCD/2025.10/bin/openocd.exe"
+    }
+}

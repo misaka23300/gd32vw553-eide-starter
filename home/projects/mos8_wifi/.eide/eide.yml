@@ -1,0 +1,73 @@
+version: "4.1"
+name: mos8_wifi
+type: RISC-V
+deviceName: null
+packDir: null
+srcDirs:
+  - src
+  - include
+  - ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/env_Eclipse
+  - ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/stubs
+  - ../../sdk/GD32VW55x_Firmware_Library/Firmware/GD32VW55x_standard_peripheral
+virtualFolder:
+  name: <virtual_root>
+  files:
+    - path: gd32vw55x_libopt.h
+  folders: []
+dependenceList: []
+outDir: build_eide
+miscInfo:
+  uid: 8c9557b63c0443d3bf47dc8515e7d415
+targets:
+  Debug:
+    cppPreprocessAttrs:
+      defineList:
+        - USE_STDPERIPH_DRIVER
+      incList:
+        - .
+        - include
+        - ../../sdk/GD32VW55x_Firmware_Library/Firmware/GD32VW55x_standard_peripheral
+        - ../../sdk/GD32VW55x_Firmware_Library/Firmware/GD32VW55x_standard_peripheral/Include
+        - ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/drivers
+        - ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/stubs
+      libList: []
+    excludeList:
+      - ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/stubs/write.c
+    settings: {}
+    toolchain: RISCV_GCC
+    toolchainConfigMap:
+      RISCV_GCC:
+        linkerScriptPath: ../../sdk/GD32VW55x_Firmware_Library/Firmware/RISCV/env_Eclipse/GD32VW553xM.lds
+        options:
+          version: 2
+          afterBuildTasks: []
+          asm-compiler:
+            ASM_FLAGS: ""
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            C_FLAGS: ""
+            language-c: gnu11
+            language-cpp: gnu++17
+            one-elf-section-per-data: true
+            one-elf-section-per-function: true
+            optimization: level-2
+            warnings: all-warnings
+          global:
+            abi: ilp32d
+            arch: rv32imafdc
+            code-model: medlow
+            misc-control: ""
+            output-debug-info: enable
+          linker:
+            $toolName: auto
+            LD_FLAGS: -nostartfiles
+            LIB_FLAGS: -lm -lc -lgcc
+            output-format: elf
+            remove-unused-input-sections: true
+    uploadConfigMap:
+      OpenOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        interface: ${workspaceFolder}/.eide/gd32vw553
+        target: gd32vw55x
+    uploader: OpenOCD

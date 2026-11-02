@@ -1,0 +1,126 @@
+/*!
+    \file    wifi_backend_msdk.c.example
+    \brief   MSDK（GD32VW55x_RELEASE）Wi-Fi 后端接入骨架
+
+    ============================ 使用说明 ============================
+    1. 把本文件改名为 wifi_backend_msdk.c，放到工程根目录；
+    2. 在 Makefile 的 APP_SRCS 里加上 wifi_backend_msdk.c；
+    3. 按 MSDK 的实际头文件/include 路径补充 INCLUDES；
+    4. 把下面每一处 TODO 换成 MSDK 里对应的函数（不同版本 API 名字有差异，
+       请以你手上 GD32VW55x_RELEASE 的 wifi_mgmt / lwip 头文件为准）。
+
+    本文件默认不参与编译（扩展名 .example），因为当前工作区的 SDK 没有 Wi-Fi 协议栈，
+    直接编译会缺少头文件和库。
+    ==================================================================
+*/
+
+#include "wifi_link.h"
+
+#include <string.h>
+
+/* TODO: 换成 MSDK 的实际头文件，常见的有：
+ *   #include "wifi_mgmt.h"
+ *   #include "wifi.h"
+ *   #include "lwip/ip_addr.h"
+ */
+
+static wifi_state_t s_state = WIFI_STATE_OFF;
+static char         s_ip[16] = "0.0.0.0";
+static int          s_inited = 0;
+
+/* ---------------------------------------------------------------
+ * 生命周期
+ * ------------------------------------------------------------- */
+
+int wifi_backend_init(void)
+{
+    if(s_inited) {
+        return 0;
+    }
+
+    /* TODO: 初始化 Wi-Fi 管理模块与 lwip，例如：
+     *   wifi_init();
+     *   wifi_mgmt_init();
+     *   tcpip_init(...);
+     */
+    s_state  = WIFI_STATE_OFF;
+    s_inited = 1;
+    return 0;
+}
+
+int wifi_backend_join(const char *ssid, const char *psk)
+{
+    if((ssid == NULL) || (psk == NULL) || !s_inited) {
+        return -1;
+    }
+
+    /* TODO: 发起 STA 连接（异步），例如：
+     *   wifi_sta_config_t cfg;
+     *   strncpy((char *)cfg.ssid, ssid, sizeof(cfg.ssid) - 1);
+     *   strncpy((char *)cfg.password, psk, sizeof(cfg.password) - 1);
+     *   return wifi_station_connect(&cfg);
+     */
+    (void)ssid;
+    (void)psk;
+
+    s_state = WIFI_STATE_CONNECTING;
+    return 0;
+}
+
+void wifi_backend_leave(void)
+{
+    /* TODO: wifi_station_disconnect(); */
+    s_state = WIFI_STATE_OFF;
+    strcpy(s_ip, "0.0.0.0");
+}
+
+/* ---------------------------------------------------------------
+ * 事件驱动
+ *
+ * MSDK 的连接结果通常在协议栈任务/回调里给出，做法是：
+ *   在回调里只记录状态（s_state / s_ip），
+ *   wifi_backend_poll() 里读这个状态给前端。
+ * 不要在这个文件里直接打印长字符串（中断/协议栈上下文不安全）。
+ * ------------------------------------------------------------- */
+
+void wifi_backend_poll(void)
+{
+    if(!s_inited) {
+        return;
+    }
+
+    /* TODO: 可选，做超时检测 / 自动重连：
+     *   if (s_state == WIFI_STATE_CONNECTING && timeout) {
+     *       s_state = WIFI_STATE_ERROR;
+     *   }
+     */
+}
+
+wifi_state_t wifi_backend_state(void)
+{
+    return s_state;
+}
+
+const char *wifi_backend_ip(void)
+{
+    return s_ip;
+}
+
+/* ---------------------------------------------------------------
+ * 回调示例（函数名必须换成 MSDK 事件分发里实际注册的名字）
+ * ------------------------------------------------------------- */
+
+/*
+static void on_sta_got_ip(const char *ip)
+{
+    strncpy(s_ip, ip, sizeof(s_ip) - 1);
+    s_ip[sizeof(s_ip) - 1] = '\0';
+    s_state = WIFI_STATE_CONNECTED;
+}
+
+static void on_sta_disconnected(void)
+{
+    s_state = WIFI_STATE_ERROR;
+    strcpy(s_ip, "0.0.0.0");
+}
+*/

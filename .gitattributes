@@ -1,0 +1,13 @@
+* text=auto
+*.c text
+*.h text
+*.py text
+*.md text
+*.yml text
+*.json text
+*.ini text
+*.cfg text
+*.txt text
+*.cmake text
+gd32 text eol=lf
+*.cmd text eol=crlf

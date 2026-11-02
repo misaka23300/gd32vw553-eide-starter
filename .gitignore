@@ -1,0 +1,27 @@
+# Downloaded toolchain and SDK (use setup_toolchain.py)
+home/tools/
+home/sdk/
+home/.tmp/
+
+# Build outputs
+home/projects/*/build/
+home/projects/*/build_eide/
+**/*.o
+**/*.d
+**/*.elf
+**/*.hex
+**/*.bin
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Editors / OS
+.vscode/ipch/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local backups
+*.bak
+*.old
