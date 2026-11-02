@@ -28,7 +28,7 @@
 ## 快速开始
 
 ```bat
-git clone <your-repo-url> gd32vw553-eide-starter
+git clone https://github.com/misaka23300/gd32vw553-eide-starter
 cd gd32vw553-eide-starter
 
 :: 1. 下载并安装工具链（会列出组件和大小，输入 y 确认）
